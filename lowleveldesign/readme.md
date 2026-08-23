@@ -1,0 +1,78 @@
+## Low Level Design
+* [OOPs Fundamentals](./oops/oops.md)
+  - [Classes and Objects](#classes-and-objects)
+  - [Enums](#enums)
+  - [Interfaces](#interfaces)
+  - [Encapsulation](#encapsulation)
+  - [Abstraction](#abstraction)
+  - [Inheritance](#inheritance)
+  - [Polymorphism](#polymorphism)
+  - [Class Relationships](#classes-and-objects)
+    - [Association](#association)
+    - [Aggregation](#aggregation)
+    - [Composition](#composition)
+    - [Dependency](#dependency)
+    - [Realization](#realization)
+    - [The Golden Rule: Composition Over Inheritance](#11-the-golden-rule-composition-over-inheritance)
+* [Core Design Principles](#core-design-principles)
+  - [Introduction to Design Principles](#introduction-to-design-principles)
+  - [SOLID Principles](#solid-principles)
+    - [Single Responsibility Principle](#single-responsibility-principle)
+    - [Open-Closed Principle](#open-closed-principle)
+    - [Liskov Substitution Principle](#liskov-substitution-principle)
+    - [Interface Segregation Principle](#interface-segregation-principle)
+    - [Dependency Inversion Principle](#dependency-inversion-principle)
+  - [General Design Guidelines](#general-design-guidelines)
+    - [DRY, KISS, and YAGNI Principles](#dry-kiss-and-yagni-principles)
+    - [High Cohesion and Loose Coupling](#high-cohesion-and-loose-coupling)
+    - [Law of Demeter](#law-of-demeter)
+    - [Separation of Concerns and Information Hiding](#separation-of-concerns-and-information-hiding)
+  - [Advanced Topics](#advanced-topics)
+    - [Designing for Testability: The Ultimate Proof of Loose Coupling](#designing-for-testability--the-ultimate-proof-of-loose-coupling)
+* [Design Patterns](#design-patterns)
+  - [Creational Patterns](#creational-patterns)
+    - [Singleton](#singleton)
+    - [Factory Method](#factory-method)
+    - [Abstract Factory](#abstract-factory)
+    - [Builder](#builder)
+    - [Prototype](#prototype)
+  - [Structural Patterns](#structural-patterns)
+    - [Adapter](#adapter)
+    - [Bridge](#bridge)
+    - [Composite](#composite)
+    - [Decorator](#decorator)
+    - [Facade](#facade)
+    - [Flyweight](#flyweight)
+    - [Proxy](#proxy)
+  - [Behavioral Patterns](#behavioral-patterns)
+    - [Iterator](#iterator)
+    - [Observer](#observer)
+    - [Strategy](#strategy)
+    - [Command](#command)
+    - [State](#state)
+    - [Template Method](#template-method)
+    - [Visitor](#visitor)
+    - [Mediator](#mediator)
+    - [Memento](#memento)
+    - [Chain of Responsibility](#chain-of-responsibility)
+* [Case Studies](#case-studies)
+  * Games & Puzzles
+  * Data Structures & Search 
+  * Managing States 
+  * Management Systems 
+  * Social & Content Platforms 
+  * Communication & Messaging 
+  * Financial & Payment Systems 
+  * E-commerce & Booking Systems 
+  * Developer Tools & Infrastructure
+
+
+
+<!--
+HIDDEN SECTION (Only visible when editing raw file):
+- https://github.com/Dhamodharan17/cse-notes
+- https://algomaster.io/learn/lld/design-splitwise
+- https://www.codingshuttle.com/low-level-system-design-lld-handbook/design-a-hotel-booking-system/
+- https://onedrive.live.com/personal/3162f98a6bffd2e6/_layouts/15/Doc.aspx?sourcedoc=%7B3cd49118-929a-4efb-b209-84289c47174e%7D&action=edit&wd=target%284-LLD.one%7Cdaca6bff-9199-4ba8-9bab-fd7f1719cbf5%2F%29&wdorigin=717&wdsectionfileid=%7B3162f98a6bffd2e6%21s5b3fbceba08a42fab89d305d97142b43%7D
+- https://app.notion.com/p/Low-Level-Design-3a2ab1fe3aaa804e9146dc0f494653dd
+-->
