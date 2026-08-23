@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scratchpad Feature</title>
+  <style>
+    /* Reset & Page Setup */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f1f5f9;
+      height: 100vh;
+    }
+
+    /* Floating Action Button (FAB) */
+    .scratchpad-fab {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background-color: #0066ff;
+      color: white;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scratchpad-fab:hover {
+      transform: scale(1.08);
+      background-color: #0052cc;
+    }
+
+    /* Card Container */
+    .scratchpad-card {
+      position: fixed;
+      bottom: 92px;
+      right: 24px;
+      width: 340px;
+      height: 320px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 1000;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .scratchpad-card.hidden {
+      display: none;
+    }
+
+    /* Header & Controls */
+    .scratchpad-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background-color: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .scratchpad-title {
+      font-weight: 600;
+      color: #334155;
+      font-size: 14px;
+    }
+
+    .scratchpad-actions {
+      display: flex;
+      gap: 4px;
+    }
+
+    .scratchpad-actions button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
+      padding: 4px 6px;
+      border-radius: 4px;
+      transition: background-color 0.15s ease;
+    }
+
+    .scratchpad-actions button:hover {
+      background-color: #e2e8f0;
+    }
+
+    /* Textarea Input */
+    #scratchpad-input {
+      flex: 1;
+      padding: 14px;
+      border: none;
+      resize: none;
+      outline: none;
+      font-family: inherit;
+      font-size: 14px;
+      color: #1e293b;
+      line-height: 1.5;
+      background: transparent;
+    }
+
+    #scratchpad-input::placeholder {
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Trigger Button -->
+  <button id="scratchpad-toggle-btn" class="scratchpad-fab" aria-label="Toggle Scratchpad">
+    ✏️
+  </button>
+
+  <!-- Scratchpad Card Widget -->
+  <div id="scratchpad-card" class="scratchpad-card hidden">
+    <div class="scratchpad-header">
+      <span class="scratchpad-title">Scratchpad</span>
+      <div class="scratchpad-actions">
+        <button id="sp-copy-btn" title="Copy to Clipboard">📋</button>
+        <button id="sp-download-btn" title="Download Notes">⬇️</button>
+        <button id="sp-clear-btn" title="Clear Scratchpad">🗑️</button>
+      </div>
+    </div>
+    <textarea 
+      id="scratchpad-input" 
+      placeholder="Type temporary notes here..."
+      spellcheck="false"
+    ></textarea>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggleBtn = document.getElementById("scratchpad-toggle-btn");
+      const card = document.getElementById("scratchpad-card");
+      const textarea = document.getElementById("scratchpad-input");
+      
+      const copyBtn = document.getElementById("sp-copy-btn");
+      const downloadBtn = document.getElementById("sp-download-btn");
+      const clearBtn = document.getElementById("sp-clear-btn");
+
+      // 1. Load saved notes from LocalStorage on page load
+      textarea.value = localStorage.getItem("scratchpad_notes") || "";
+
+      // 2. Persist notes automatically as the user types
+      textarea.addEventListener("input", () => {
+        localStorage.setItem("scratchpad_notes", textarea.value);
+      });
+
+      // 3. Toggle scratchpad card display
+      toggleBtn.addEventListener("click", () => {
+        card.classList.toggle("hidden");
+        if (!card.classList.contains("hidden")) {
+          textarea.focus();
+        }
+      });
+
+      // 4. Copy current content to clipboard
+      copyBtn.addEventListener("click", () => {
+        if (!textarea.value) return;
+        navigator.clipboard.writeText(textarea.value);
+      });
+
+      // 5. Download content as a text file
+      downloadBtn.addEventListener("click", () => {
+        if (!textarea.value) return;
+        const blob = new Blob([textarea.value], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "scratchpad-notes.txt";
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+
+      // 6. Clear content and store state
+      clearBtn.addEventListener("click", () => {
+        textarea.value = "";
+        localStorage.removeItem("scratchpad_notes");
+      });
+    });
+  </script>
+</body>
+</html>

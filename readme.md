@@ -25,7 +25,7 @@
     * [Handling Failures](#case-studies)
     * [Removing Single Point of Failure](#case-studies)
 * [Low Level Design](./lowleveldesign/readme.md)
-  * [OOPs Fundamentals](./oops/oops.md)
+  * [OOPs Fundamentals](./lowleveldesign/oops/oops.md)
   * [Core Design Principles](#core-design-principles)
   * [Design Patterns](#design-patterns)
   * [Case Studies & Appoach ](#case-studies)
