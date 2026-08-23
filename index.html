@@ -135,7 +135,7 @@
 
   <script>
     // 1. Fetch and render README.md dynamically
-    fetch('README.md')
+    fetch('readme.md')
       .then(response => {
         if (!response.ok) throw new Error("README.md not found");
         return response.text();
