@@ -29,7 +29,9 @@
 2. Each **object gets its own copy of the data** defined in the class, **shares the same structure and behavior, and operates independently** of every other object created from that same class.
 
 <details>
-<summary>Code </summary>
+$1
+
+
 
 ```java
 import java.util.ArrayList;
@@ -211,13 +213,17 @@ public class Main {
 
 When a class implements multiple interfaces, an instance of that class can masquerade as any of those interface types. The caller doesn't need to know anything about the concrete class—it only cares that the object guarantees the contract (methods) defined by the interface. That is the c**ore power of polymorphism paired with interface-based multiple inheritance.**
   <details>
-  <summary>ISP on Multiple Inheritence</summary>
+  $1
+
+
   In real-world software architecture, the decision to make a class implement multiple interfaces is guided by the Interface Segregation Principle (ISP)—the idea that clients should not be forced to depend on methods they do not use.
 
   Instead of creating one massive interface with dozens of methods, engineers design small, focused interfaces representing specific capabilities or roles. A concrete class then implements multiple interfaces to assemble its complete set of capabilities.
 </details>
 <details>
-<summary>code</summary>
+$1
+
+
 
   ```java
   public class CheckoutService {
@@ -378,7 +384,9 @@ This allows for both reuse and customization.
 * **Tight Coupling Risks:** Avoid it when you want to prevent tight coupling between child and parent internals **. Changes to a parent class** ripple down to every child in the hierarchy, which is risky in large codebases.
 
 <details>
-  <summary> Dynamic Behaviors & Runtime Flexibility</summary>
+  $1
+
+
 **Combining behaviors** means assembling different capabilities like building blocks, rather than locking a class into a single static parent hierarchy.
 
 ---
