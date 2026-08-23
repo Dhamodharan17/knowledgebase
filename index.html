@@ -3,21 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scratchpad Feature</title>
+  <title>Knowledgebase</title>
+  
+  <!-- Markdown Parser & GitHub Styling -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.0/github-markdown.min.css">
+
   <style>
-    /* Reset & Page Setup */
-    * {
+    /* Rendered Markdown Styling Container */
+    .markdown-body {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #f1f5f9;
-      height: 100vh;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 45px;
     }
 
-    /* Floating Action Button (FAB) */
+    @media (max-width: 767px) {
+      .markdown-body {
+        padding: 15px;
+      }
+    }
+
+    /* Scratchpad FAB */
     .scratchpad-fab {
       position: fixed;
       bottom: 24px;
@@ -43,7 +51,7 @@
       background-color: #0052cc;
     }
 
-    /* Card Container */
+    /* Scratchpad Card */
     .scratchpad-card {
       position: fixed;
       bottom: 92px;
@@ -58,14 +66,12 @@
       flex-direction: column;
       overflow: hidden;
       z-index: 1000;
-      transition: opacity 0.2s ease, transform 0.2s ease;
     }
 
     .scratchpad-card.hidden {
       display: none;
     }
 
-    /* Header & Controls */
     .scratchpad-header {
       display: flex;
       justify-content: space-between;
@@ -81,11 +87,6 @@
       font-size: 14px;
     }
 
-    .scratchpad-actions {
-      display: flex;
-      gap: 4px;
-    }
-
     .scratchpad-actions button {
       background: none;
       border: none;
@@ -93,14 +94,12 @@
       font-size: 15px;
       padding: 4px 6px;
       border-radius: 4px;
-      transition: background-color 0.15s ease;
     }
 
     .scratchpad-actions button:hover {
       background-color: #e2e8f0;
     }
 
-    /* Textarea Input */
     #scratchpad-input {
       flex: 1;
       padding: 14px;
@@ -111,22 +110,17 @@
       font-size: 14px;
       color: #1e293b;
       line-height: 1.5;
-      background: transparent;
-    }
-
-    #scratchpad-input::placeholder {
-      color: #94a3b8;
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating Trigger Button -->
-  <button id="scratchpad-toggle-btn" class="scratchpad-fab" aria-label="Toggle Scratchpad">
-    ✏️
-  </button>
+  <!-- Container where README content will display -->
+  <article id="content" class="markdown-body"></article>
 
-  <!-- Scratchpad Card Widget -->
+  <!-- Scratchpad Widget -->
+  <button id="scratchpad-toggle-btn" class="scratchpad-fab" aria-label="Toggle Scratchpad">✏️</button>
+
   <div id="scratchpad-card" class="scratchpad-card hidden">
     <div class="scratchpad-header">
       <span class="scratchpad-title">Scratchpad</span>
@@ -136,47 +130,45 @@
         <button id="sp-clear-btn" title="Clear Scratchpad">🗑️</button>
       </div>
     </div>
-    <textarea 
-      id="scratchpad-input" 
-      placeholder="Type temporary notes here..."
-      spellcheck="false"
-    ></textarea>
+    <textarea id="scratchpad-input" placeholder="Type temporary notes here..." spellcheck="false"></textarea>
   </div>
 
   <script>
+    // 1. Fetch and render README.md dynamically
+    fetch('README.md')
+      .then(response => {
+        if (!response.ok) throw new Error("README.md not found");
+        return response.text();
+      })
+      .then(text => {
+        document.getElementById('content').innerHTML = marked.parse(text);
+      })
+      .catch(err => {
+        document.getElementById('content').innerHTML = "<h1>Error loading content</h1><p>" + err + "</p>";
+      });
+
+    // 2. Scratchpad functionality
     document.addEventListener("DOMContentLoaded", () => {
       const toggleBtn = document.getElementById("scratchpad-toggle-btn");
       const card = document.getElementById("scratchpad-card");
       const textarea = document.getElementById("scratchpad-input");
       
-      const copyBtn = document.getElementById("sp-copy-btn");
-      const downloadBtn = document.getElementById("sp-download-btn");
-      const clearBtn = document.getElementById("sp-clear-btn");
-
-      // 1. Load saved notes from LocalStorage on page load
       textarea.value = localStorage.getItem("scratchpad_notes") || "";
 
-      // 2. Persist notes automatically as the user types
       textarea.addEventListener("input", () => {
         localStorage.setItem("scratchpad_notes", textarea.value);
       });
 
-      // 3. Toggle scratchpad card display
       toggleBtn.addEventListener("click", () => {
         card.classList.toggle("hidden");
-        if (!card.classList.contains("hidden")) {
-          textarea.focus();
-        }
+        if (!card.classList.contains("hidden")) textarea.focus();
       });
 
-      // 4. Copy current content to clipboard
-      copyBtn.addEventListener("click", () => {
-        if (!textarea.value) return;
-        navigator.clipboard.writeText(textarea.value);
+      document.getElementById("sp-copy-btn").addEventListener("click", () => {
+        if (textarea.value) navigator.clipboard.writeText(textarea.value);
       });
 
-      // 5. Download content as a text file
-      downloadBtn.addEventListener("click", () => {
+      document.getElementById("sp-download-btn").addEventListener("click", () => {
         if (!textarea.value) return;
         const blob = new Blob([textarea.value], { type: "text/plain" });
         const url = URL.createObjectURL(blob);
@@ -187,8 +179,7 @@
         URL.revokeObjectURL(url);
       });
 
-      // 6. Clear content and store state
-      clearBtn.addEventListener("click", () => {
+      document.getElementById("sp-clear-btn").addEventListener("click", () => {
         textarea.value = "";
         localStorage.removeItem("scratchpad_notes");
       });
