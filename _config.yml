@@ -1,5 +1,3 @@
-markdown: CommonMarkGhPages
-
 defaults:
   - scope:
       path: ""
