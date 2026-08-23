@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.0/github-markdown.min.css">
 
   <style>
-    /* Rendered Markdown Styling Container */
     .markdown-body {
       box-sizing: border-box;
       min-width: 200px;
@@ -20,12 +19,10 @@
     }
 
     @media (max-width: 767px) {
-      .markdown-body {
-        padding: 15px;
-      }
+      .markdown-body { padding: 15px; }
     }
 
-    /* Scratchpad FAB */
+    /* Scratchpad Floating Button */
     .scratchpad-fab {
       position: fixed;
       bottom: 24px;
@@ -46,10 +43,7 @@
       justify-content: center;
     }
 
-    .scratchpad-fab:hover {
-      transform: scale(1.08);
-      background-color: #0052cc;
-    }
+    .scratchpad-fab:hover { transform: scale(1.08); background-color: #0052cc; }
 
     /* Scratchpad Card */
     .scratchpad-card {
@@ -68,9 +62,7 @@
       z-index: 1000;
     }
 
-    .scratchpad-card.hidden {
-      display: none;
-    }
+    .scratchpad-card.hidden { display: none; }
 
     .scratchpad-header {
       display: flex;
@@ -81,11 +73,7 @@
       border-bottom: 1px solid #e2e8f0;
     }
 
-    .scratchpad-title {
-      font-weight: 600;
-      color: #334155;
-      font-size: 14px;
-    }
+    .scratchpad-title { font-weight: 600; color: #334155; font-size: 14px; }
 
     .scratchpad-actions button {
       background: none;
@@ -96,9 +84,7 @@
       border-radius: 4px;
     }
 
-    .scratchpad-actions button:hover {
-      background-color: #e2e8f0;
-    }
+    .scratchpad-actions button:hover { background-color: #e2e8f0; }
 
     #scratchpad-input {
       flex: 1;
@@ -115,7 +101,7 @@
 </head>
 <body>
 
-  <!-- Container where README content will display -->
+  <!-- Render Container -->
   <article id="content" class="markdown-body"></article>
 
   <!-- Scratchpad Widget -->
@@ -134,20 +120,78 @@
   </div>
 
   <script>
-    // 1. Fetch and render README.md dynamically
-    fetch('readme.md')
-      .then(response => {
-        if (!response.ok) throw new Error("README.md not found");
-        return response.text();
-      })
-      .then(text => {
-        document.getElementById('content').innerHTML = marked.parse(text);
-      })
-      .catch(err => {
-        document.getElementById('content').innerHTML = "<h1>Error loading content</h1><p>" + err + "</p>";
-      });
+    let currentDocPath = "readme.md";
 
-    // 2. Scratchpad functionality
+    // 1. Load Markdown file based on URL Hash or default to README.md
+    async function renderPage() {
+      const contentDiv = document.getElementById('content');
+      const hash = window.location.hash.substring(1);
+      
+      let filePath = hash ? hash : 'readme.md';
+      let targetAnchor = "";
+
+      // Handle internal section links (#file.md#section)
+      if (filePath.includes('#')) {
+        const parts = filePath.split('#');
+        filePath = parts[0];
+        targetAnchor = parts[1];
+      }
+
+      currentDocPath = filePath;
+
+      try {
+        const response = await fetch(filePath);
+        if (!response.ok) throw new Error("Page not found");
+        const text = await response.text();
+        
+        contentDiv.innerHTML = marked.parse(text);
+        
+        // Intercept all local .md links to open in SPA mode
+        attachLinkInterceptors();
+
+        // Scroll to anchor if specified
+        if (targetAnchor) {
+          const el = document.getElementById(targetAnchor);
+          if (el) el.scrollIntoView();
+        } else {
+          window.scrollTo(0, 0);
+        }
+      } catch (err) {
+        contentDiv.innerHTML = `<h1>404 - Document Not Found</h1><p>Could not load <code>${filePath}</code></p><a href="#">Back to Home</a>`;
+      }
+    }
+
+    // 2. Intercept clicks on links pointing to .md files
+    function attachLinkInterceptors() {
+      const links = document.querySelectorAll('#content a');
+      links.forEach(link => {
+        const href = link.getAttribute('href');
+        
+        if (href && (href.endsWith('.md') || href.includes('.md#'))) {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Resolve relative paths based on current directory
+            let targetPath = new URL(href, window.location.href.origin + window.location.pathname + "/../" + currentDocPath).pathname;
+            
+            // Format path relative to repo root
+            const basePath = window.location.pathname;
+            if (targetPath.startsWith(basePath)) {
+              targetPath = targetPath.substring(basePath.length);
+            }
+            if (targetPath.startsWith('/')) targetPath = targetPath.substring(1);
+
+            window.location.hash = targetPath;
+          });
+        }
+      });
+    }
+
+    // Listen for hash changes (Browser Back/Forward buttons)
+    window.addEventListener('hashchange', renderPage);
+    window.addEventListener('DOMContentLoaded', renderPage);
+
+    // 3. Scratchpad Widget Functionality
     document.addEventListener("DOMContentLoaded", () => {
       const toggleBtn = document.getElementById("scratchpad-toggle-btn");
       const card = document.getElementById("scratchpad-card");
