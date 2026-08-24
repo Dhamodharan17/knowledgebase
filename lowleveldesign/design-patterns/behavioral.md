@@ -1,5 +1,4 @@
-## Behavioral Design Pattern
-
+## Structural Design Pattern
 - [Structural Patterns](#structural-patterns)
     - [Adapter](#adapter)
     - [Bridge](#bridge)
@@ -8,3 +7,5 @@
     - [Facade](#facade)
     - [Flyweight](#flyweight)
     - [Proxy](#proxy)
+      - https://medium.com/javadeveloperdiary-jdd/proxy-design-pattern-java-get-the-gist-in-2-min-684adff7b077
+      - like reverse proxy infront server which does cross cutting concerns like caching, performance.
