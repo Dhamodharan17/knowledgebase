@@ -92,7 +92,7 @@
     async function loadMarkdown() {
       const contentDiv = document.getElementById('content');
       const params = new URLSearchParams(window.location.search);
-      const filePath = params.get('file') || 'readme.md';
+      const filePath = params.get('file') || 'README.md';
 
       try {
         const response = await fetch(filePath);
@@ -152,12 +152,43 @@
       URL.revokeObjectURL(a.href);
     }
     
+    // LocalStorage persistence & Auto-bullet logic
     (function() {
       var ta = document.getElementById('scratchpad-text');
       ta.value = localStorage.getItem('scratchpad') || '';
-      ta.addEventListener('input', () => localStorage.setItem('scratchpad', ta.value));
+      
+      ta.addEventListener('input', function() {
+        localStorage.setItem('scratchpad', ta.value);
+      });
+
+      // Auto-bullet on Enter
+      ta.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          const start = this.selectionStart;
+          const end = this.selectionEnd;
+          const value = this.value;
+          
+          const currentLineStart = value.lastIndexOf('\n', start - 1) + 1;
+          const currentLine = value.substring(currentLineStart, start);
+
+          if (currentLine.startsWith('- ') || currentLine.startsWith('* ')) {
+            e.preventDefault();
+            const prefix = currentLine.substring(0, 2);
+            
+            if (currentLine.trim() === '-' || currentLine.trim() === '*') {
+              this.value = value.substring(0, currentLineStart) + value.substring(end);
+              this.selectionStart = this.selectionEnd = currentLineStart;
+            } else {
+              this.value = value.substring(0, start) + '\n' + prefix + value.substring(end);
+              this.selectionStart = this.selectionEnd = start + 3;
+            }
+            localStorage.setItem('scratchpad', this.value);
+          }
+        }
+      });
     })();
 
+    // Edge Resizing
     (function() {
       var sp = document.getElementById('scratchpad');
       var edges = sp.querySelectorAll('.sp-edge');
