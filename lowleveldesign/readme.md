@@ -1,4 +1,4 @@
-## Low Level Design
+# Low Level Design
 
 - [OOPs Fundamentals](./oops/oops.md)
   - [Classes and Objects](#classes-and-objects)
@@ -25,11 +25,8 @@
     - [Dependency Inversion Principle](#dependency-inversion-principle)
   - [General Design Guidelines](#general-design-guidelines)
     - [DRY, KISS, and YAGNI Principles](#dry-kiss-and-yagni-principles)
-    - [High Cohesion and Loose Coupling](#high-cohesion-and-loose-coupling)
     - [Law of Demeter](#law-of-demeter)
     - [Separation of Concerns and Information Hiding](#separation-of-concerns-and-information-hiding)
-  - [Advanced Topics](#advanced-topics)
-    - [Designing for Testability: The Ultimate Proof of Loose Coupling](#designing-for-testability--the-ultimate-proof-of-loose-coupling)
 - [Design Patterns](#design-patterns)
   - [Creational Patterns](#creational-patterns)
     - [Singleton](#singleton)

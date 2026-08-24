@@ -88,42 +88,97 @@
   </div>
 
   <script>
-    // Fetch file from parameter or fallback to README.md
+    let currentFilePath = 'readme.md';
+
+    // 1. Force marked.js to generate header IDs for anchor scrolling
+    const renderer = new marked.Renderer();
+    renderer.heading = function(text, level, raw) {
+      const id = raw.toLowerCase().replace(/[^\w]+/g, '-');
+      return `<h${level} id="${id}">${text}</h${level}>`;
+    };
+    marked.setOptions({ renderer: renderer });
+
+    // 2. Load and render Markdown content
     async function loadMarkdown() {
       const contentDiv = document.getElementById('content');
       const params = new URLSearchParams(window.location.search);
-      const filePath = params.get('file') || 'readme.md';
+      currentFilePath = params.get('file') || 'readme.md';
 
       try {
-        const response = await fetch(filePath);
+        const response = await fetch(currentFilePath);
         if (response.ok) {
           const text = await response.text();
           contentDiv.innerHTML = marked.parse(text);
-          interceptLinks(filePath);
+
+          // Allow DOM to update before trying to scroll to header ID
+          setTimeout(() => {
+            if (window.location.hash) {
+              const hashId = decodeURIComponent(window.location.hash.substring(1));
+              const target = document.getElementById(hashId);
+              if (target) {
+                target.scrollIntoView();
+              }
+            } else {
+              window.scrollTo(0, 0);
+            }
+          }, 50);
           return;
         }
       } catch (e) {}
 
-      contentDiv.innerHTML = `<h1>Error Loading Content</h1><p>Could not load path: <code>${filePath}</code></p>`;
+      contentDiv.innerHTML = `<h1>Error Loading Content</h1><p>Could not load path: <code>${currentFilePath}</code></p>`;
     }
 
-    // Rewrite relative .md links so they open inside this template instead of raw files
-    function interceptLinks(currentFilePath) {
-      const container = document.getElementById('content');
-      const links = container.querySelectorAll('a');
-      const currentDir = currentFilePath.includes('/') ? currentFilePath.substring(0, currentFilePath.lastIndexOf('/')) : '';
-
-      links.forEach(link => {
-        const href = link.getAttribute('href');
-        if (href && href.endsWith('.md') && !href.startsWith('http')) {
-          let targetPath = href;
-          if (currentDir && !href.startsWith('/')) {
-            targetPath = `${currentDir}/${href}`;
-          }
-          link.setAttribute('href', `?file=${targetPath}`);
+    // 3. Resolve relative file paths safely
+    function resolvePath(relativeUrl, currentFile) {
+      const baseDir = currentFile.includes('/') ? currentFile.substring(0, currentFile.lastIndexOf('/')) : '';
+      const fullPath = baseDir ? `${baseDir}/${relativeUrl}` : relativeUrl;
+      
+      const stack = [];
+      const parts = fullPath.split('/');
+      for (const part of parts) {
+        if (part === '' || part === '.') continue;
+        if (part === '..') {
+          if (stack.length > 0) stack.pop();
+        } else {
+          stack.push(part);
         }
-      });
+      }
+      return stack.join('/');
     }
+
+    // 4. Global click interceptor
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+
+      let href = link.getAttribute('href');
+      if (!href || href.startsWith('http://') || href.startsWith('https://')) return;
+
+      e.preventDefault();
+
+      // Clean invalid slashes before hash: file.md/#hash -> file.md#hash
+      href = href.replace('.md/#', '.md#');
+
+      // If it's just a local page anchor (#header-name)
+      if (href.startsWith('#')) {
+        const id = href.substring(1);
+        const target = document.getElementById(id);
+        if (target) target.scrollIntoView();
+        window.history.pushState(null, '', `?file=${currentFilePath}#${id}`);
+        return;
+      }
+
+      // If it's a markdown link (file.md or file.md#hash)
+      if (href.includes('.md')) {
+        const [pathPart, hashPart] = href.split('#');
+        const resolvedPath = resolvePath(pathPart, currentFilePath);
+        const newUrl = hashPart ? `?file=${resolvedPath}#${hashPart}` : `?file=${resolvedPath}`;
+        
+        window.history.pushState(null, '', newUrl);
+        loadMarkdown();
+      }
+    });
 
     window.addEventListener('popstate', loadMarkdown);
     loadMarkdown();
@@ -152,7 +207,7 @@
       URL.revokeObjectURL(a.href);
     }
     
-    // LocalStorage persistence & Auto-bullet logic
+    // Auto-bulleting & storage
     (function() {
       var ta = document.getElementById('scratchpad-text');
       ta.value = localStorage.getItem('scratchpad') || '';
@@ -161,7 +216,6 @@
         localStorage.setItem('scratchpad', ta.value);
       });
 
-      // Auto-bullet on Enter
       ta.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
           const start = this.selectionStart;
@@ -188,7 +242,7 @@
       });
     })();
 
-    // Edge Resizing
+    // Resize functionality
     (function() {
       var sp = document.getElementById('scratchpad');
       var edges = sp.querySelectorAll('.sp-edge');

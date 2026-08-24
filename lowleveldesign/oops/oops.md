@@ -8,12 +8,12 @@
   - [Abstraction](#abstraction)
   - [Inheritance](#inheritance)
   - [Polymorphism](#polymorphism)
-  - [Class Relationships](classrelation.md/#class-relationships)
-    - [Association](classrelation.md/#aggregation)
-    - [Aggregation](classrelation.md/#association)
-    - [Composition](classrelation.md/#composition)
-    - [Dependency](dependency.md/#dependency)
-    - [Realization](realization.md/#realization)
+  - [Class Relationships](classrelation.md#class-relationships)
+    - [Association](classrelation.md#aggregation)
+    - [Aggregation](classrelation.md#association)
+    - [Composition](classrelation.md#composition)
+    - [Dependency](dependency.md#dependency)
+    - [Realization](realization.md#realization)
 
 ---
 

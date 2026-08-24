@@ -6,7 +6,7 @@
   A student enrolls in courses.
 - our goal is to model this real world where objects**communicate and work together to achieve meaningful outcomes.**
 
-> > Garbage Collection based thinking helps to understand ownership.
+> > Garbage Collection/fk in sql based thinking helps to understand ownership.
 
 ### Association
 
