@@ -92,7 +92,7 @@
     async function loadMarkdown() {
       const contentDiv = document.getElementById('content');
       const params = new URLSearchParams(window.location.search);
-      const filePath = params.get('file') || 'README.md';
+      const filePath = params.get('file') || 'readme.md';
 
       try {
         const response = await fetch(filePath);
