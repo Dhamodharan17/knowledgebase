@@ -8,7 +8,7 @@ A systematic, time-boxed playbook for clearing Object-Oriented Design (OOD) and 
 
 Many candidates fail LLD rounds not from a lack of coding skills, but due to bad interview execution.
 
-````
+```
 
 Common Trap Sequence:
 
@@ -18,7 +18,7 @@ Common Trap Sequence:
 4. Result: 30 minutes in, candidate has 15 classes that do nothing.
 5. Interviewer asks: "How do I execute the main flow?" -> Silence.
 
-
+```
 
 **Core Principle:** Design top-down driven by behavior, not bottom-up driven by passive data models.
 
@@ -29,14 +29,15 @@ Common Trap Sequence:
 Ask intent-driven questions to establish the system boundary and core execution flow before touching the board.
 
 **Key Clarifications to Ask:**
-* **Primary User & Action:** Who is using the system, and what is their main goal?
-* **Success Metric:** What does success look like in one sentence?
-* **Concurrency & Scale:** Is this a single-user system, or are there multi-threaded/concurrent requests?
-* **Persistence:** Are objects held purely in memory, or is database/storage integration expected?
+
+- **Primary User & Action:** Who is using the system, and what is their main goal?
+- **Success Metric:** What does success look like in one sentence?
+- **Concurrency & Scale:** Is this a single-user system, or are there multi-threaded/concurrent requests?
+- **Persistence:** Are objects held purely in memory, or is database/storage integration expected?
 
 > **The 20-Second Scope Restatement:**
 > Always close Phase 1 by restating the scope back to the interviewer:
-> *"So we are building a multi-level parking lot with a single entry/exit, hourly billing, and no reservations. Is that correct?"*
+> _"So we are building a multi-level parking lot with a single entry/exit, hourly billing, and no reservations. Is that correct?"_
 
 ---
 
@@ -44,14 +45,14 @@ Ask intent-driven questions to establish the system boundary and core execution 
 
 Extract top-level domain nouns from the agreed scope. Keep entities minimal and validate them using the **One-Line Responsibility Rule**.
 
-* Write a single line defining what each entity does.
-* If an entity cannot earn a unique one-line responsibility based on the immediate requirements, **exclude it**.
+- Write a single line defining what each entity does.
+- If an entity cannot earn a unique one-line responsibility based on the immediate requirements, **exclude it**.
 
-| Candidate Entity | One-Line Responsibility Check | Decision |
-| :--- | :--- | :--- |
-| **`ParkingLot`** | Manages floors, entry/exit gates, and coordinates spot allocations. | **Keep** |
-| **`Ticket`** | Tracks entry timestamp, vehicle ID, and assigned spot ID for billing. | **Keep** |
-| **`ElectricCar`** | "It is a car that is electric." (No unique behavior required by scope). | **Drop** |
+| Candidate Entity   | One-Line Responsibility Check                                           | Decision |
+| :----------------- | :---------------------------------------------------------------------- | :------- |
+| **`ParkingLot`**   | Manages floors, entry/exit gates, and coordinates spot allocations.     | **Keep** |
+| **`Ticket`**       | Tracks entry timestamp, vehicle ID, and assigned spot ID for billing.   | **Keep** |
+| **`ElectricCar`**  | "It is a car that is electric." (No unique behavior required by scope). | **Drop** |
 | **`SpotObserver`** | Observes spot changes. (Overkill; a simple boolean state handles this). | **Drop** |
 
 ---
@@ -61,6 +62,7 @@ Extract top-level domain nouns from the agreed scope. Keep entities minimal and 
 Drive your design **Top-Down using the Facade Pattern**. Define the high-level control flow before implementing low-level leaf nodes.
 
 ### Step 1: Define the Facade / Main Controller First
+
 Create the entry-point class that receives external events and exposes the primary operations.
 
 ```java
@@ -81,7 +83,7 @@ public class ParkingLotFacade {
     }
 }
 
-````
+```
 
 ### Step 2: Expand Inward to Leaf Nodes
 
