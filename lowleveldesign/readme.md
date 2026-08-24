@@ -1,5 +1,6 @@
 ## Low Level Design
-* [OOPs Fundamentals](./oops/oops.md)
+
+- [OOPs Fundamentals](./oops/oops.md)
   - [Classes and Objects](#classes-and-objects)
   - [Enums](#enums)
   - [Interfaces](#interfaces)
@@ -14,7 +15,7 @@
     - [Dependency](#dependency)
     - [Realization](#realization)
     - [The Golden Rule: Composition Over Inheritance](#11-the-golden-rule-composition-over-inheritance)
-* [Core Design Principles](#core-design-principles)
+- [Core Design Principles](#core-design-principles)
   - [Introduction to Design Principles](#introduction-to-design-principles)
   - [SOLID Principles](#solid-principles)
     - [Single Responsibility Principle](#single-responsibility-principle)
@@ -29,7 +30,7 @@
     - [Separation of Concerns and Information Hiding](#separation-of-concerns-and-information-hiding)
   - [Advanced Topics](#advanced-topics)
     - [Designing for Testability: The Ultimate Proof of Loose Coupling](#designing-for-testability--the-ultimate-proof-of-loose-coupling)
-* [Design Patterns](#design-patterns)
+- [Design Patterns](#design-patterns)
   - [Creational Patterns](#creational-patterns)
     - [Singleton](#singleton)
     - [Factory Method](#factory-method)
@@ -55,18 +56,16 @@
     - [Mediator](#mediator)
     - [Memento](#memento)
     - [Chain of Responsibility](#chain-of-responsibility)
-* [Case Studies](#case-studies)
-  * Games & Puzzles
-  * Data Structures & Search 
-  * Managing States 
-  * Management Systems 
-  * Social & Content Platforms 
-  * Communication & Messaging 
-  * Financial & Payment Systems 
-  * E-commerce & Booking Systems 
-  * Developer Tools & Infrastructure
-
-
+- [Case Studies](#case-studies)
+  - Games & Puzzles
+  - Data Structures & Search
+  - Managing States
+  - Management Systems
+  - Social & Content Platforms
+  - Communication & Messaging
+  - Financial & Payment Systems
+  - E-commerce & Booking Systems
+  - Developer Tools & Infrastructure
 
 <!--
 HIDDEN SECTION (Only visible when editing raw file):
