@@ -17,6 +17,46 @@
 
 ---
 
+## Revision Space
+
+<details>
+<summary>revision 1 short notes</summary>
+  OOPs
+
+1. class is template for object defines what data and methods object should contains where each object have similiar structure and independent state.
+
+2. object - instance of class that we store data, invoke methods and interact with. each object gets own copy of the data.
+
+3. enum - fixed set of named constant which complier enforces type check.
+
+public enum PaymentMethod {
+
+CREDIT_CARD("Credit Card", 2.5)//pass any number
+}
+
+- initilaise constructor with same type order
+
+  4.interface - set of method contract, implementer must provide.
+
+- foundation of flexible software design, we can place swap any implementer implementing this interface. which is decoupling. and easily pass new implemenation without modifiying existing code.
+
+  5.encapsulation - grouping data and methods operate on that data into single unit restricting direct access to internal state. exposing behaviour not data
+
+encapsulation - create boundary and predictability of who all can change data.
+
+achiveid using access modifier and getter/setter/domain methods like getRoomCount()
+
+1. abstaction - same as interface use when we have some common logic among all concerte class.
+
+- we can implement multiple interface but extend only one interface.
+
+1. inheritence - reuse common logic and prequsite for runtime polymorphim
+   8 runtime polymorphism - exhibit different beaviout based on object that invoke it
+
+</details>
+
+---
+
 ### Classes and Objects
 
 #### Class
