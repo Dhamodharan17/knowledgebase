@@ -10,11 +10,10 @@
   - [Polymorphism](#polymorphism)
   - [Class Relationships](classrelation.md/#class-relationships)
     - [Association](classrelation.md/#aggregation)
-    - [Aggregation](#aggregation)
-    - [Composition](#composition)
-    - [Dependency](#dependency)
-    - [Realization](#realization)
-    - [The Golden Rule: Composition Over Inheritance](#the-golden-rule-composition-over-inheritance)
+    - [Aggregation](classrelation.md/#association)
+    - [Composition](classrelation.md/#composition)
+    - [Dependency](dependency.md/#dependency)
+    - [Realization](realization.md/#realization)
 
 ---
 
