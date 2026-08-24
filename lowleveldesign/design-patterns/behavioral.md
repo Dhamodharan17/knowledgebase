@@ -5,7 +5,9 @@
     - [Composite](#composite)
     - [Decorator](#decorator)
     - [Facade](#facade)
-    - [Flyweight](#flyweight)
+    - [Chain Of Responsibilty](#flyweight)
+      - https://levelup.gitconnected.com/9-design-pattern-chain-of-responsibility-2f370311a7e9
+        - Each handler has the next handler with it and it passes the request to the next handler if it is not able to fulfill that request. We always try to put the most obvious or used handler first. 
     - [Proxy](#proxy)
       - https://medium.com/javadeveloperdiary-jdd/proxy-design-pattern-java-get-the-gist-in-2-min-684adff7b077
       - like reverse proxy infront server which does cross cutting concerns like caching, performance.
