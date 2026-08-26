@@ -28,6 +28,26 @@ State flow - covert requirement - create entity to make the flow work, create cl
 >
 > That restatement is the cheapest insurance policy in the whole interview. It takes twenty seconds and it means everything you draw afterward is agreed upon.
 
+<details>
+<summary>Extra Notes</summary>
+For an unknown LLD problem, first list user actions, then system responsibilities after each action, and finally edge cases around failure or invalid actions.
+
+For this vending machine,
+
+user actions are: view items, select item, insert coin, cancel, collect item.
+
+System actions are: check stock, track balance, validate coin, dispense item, return change, refund, update inventory
+
+**Requirement gathering**
+
+User journey
+
+Conditions on system like withdrawal of system.
+
+Rules like system should dispense based on cash availability
+
+</details>
+
 # 2. Entities
 
 - Noun Extraction (Topdown)
