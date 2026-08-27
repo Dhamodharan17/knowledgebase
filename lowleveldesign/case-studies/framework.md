@@ -34,9 +34,14 @@ For an unknown LLD problem, first list user actions, then system responsibilitie
 
 For this vending machine,
 
-user actions are: view items, select item, insert coin, cancel, collect item.
+1. user actions are: view items, select item, insert coin, cancel, collect item.
 
-System actions are: check stock, track balance, validate coin, dispense item, return change, refund, update inventory
+2. System actions are: check stock, track balance, validate coin, dispense item, return change, refund, update inventory.
+3. characterisitic of system
+4. condition of system
+
+- come from both end
+- user -> <- system. (2nd swoard in each step)
 
 **Requirement gathering**
 

@@ -1,4 +1,4 @@
-SCP
+### SCP
 
 - <https://medium.com/@bhangalekunal2631996/understanding-java-string-constant-pool-concepts-mechanisms-and-examples-with-diagrams-010122c7ced0>
 - there are 2 areas strings are stored -> heap strings and scp strings
