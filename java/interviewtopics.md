@@ -19,6 +19,7 @@
   - [Anonymous Classes](#anonymous-classes)
   - [Nested Classes](#nested-classes)
   - [Pass-by-Value](#pass-by-value)
+    - String Immutability
   - [String / String Pool](#string--string-pool)
   - [StringBuilder / StringBuffer](#stringbuilder--stringbuffer)
   - [Wrapper Classes](#wrapper-classes)
