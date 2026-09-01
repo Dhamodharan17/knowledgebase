@@ -92,9 +92,18 @@
 
     // 1. Force marked.js to create heading IDs matching link anchors
     const renderer = new marked.Renderer();
-    renderer.heading = function(text, level, raw) {
-      const id = raw.toLowerCase().replace(/[^\w]+/g, '-');
-      return `<h${level} id="${id}">${text}</h${level}>`;
+    renderer.heading = function(token, level, raw) {
+      if (token && typeof token === 'object') {
+        const headingText = String(token.text ?? token.raw ?? '');
+        const id = headingText.toLowerCase().replace(/[^\w]+/g, '-').replace(/^-+|-+$/g, '');
+        return `<h${token.depth} id="${id}">${headingText}</h${token.depth}>`;
+      }
+
+      const headingText = String(token ?? '');
+      const headingLevel = level || 1;
+      const source = typeof raw === 'string' && raw ? raw : headingText;
+      const id = source.toLowerCase().replace(/[^\w]+/g, '-').replace(/^-+|-+$/g, '');
+      return `<h${headingLevel} id="${id}">${headingText}</h${headingLevel}>`;
     };
     marked.setOptions({ renderer: renderer });
 

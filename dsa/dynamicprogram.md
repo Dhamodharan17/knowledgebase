@@ -9,8 +9,10 @@ class Solution:
         n = len(nums)
         lookup = {}
 
+        # maximum profit in the partition (i,j)
         def f(i, j):
             if i > j:
+                # maximum profit in invalid partition = 0
                 return 0
             if (i, j) in lookup:
                 return lookup[(i,j)]
