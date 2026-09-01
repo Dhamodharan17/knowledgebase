@@ -146,7 +146,7 @@
 
 </details>
 
-## ![Hospital Design](/lowleveldesign/assets/hospitalclassdesign.png)
+## ![Hospital Design](../assets/hospitalclassdesign.png)
 
 **Why This Design Works**
 
@@ -188,7 +188,7 @@ public class Main {
 }
 ```
 
-## ![Hospital Design](/lowleveldesign/assets/playlistdesign.png)
+## ![Hospital Design](../assets/playlistdesign.png)
 
 **The diagram shows two classes connected by aggregation:**
 
@@ -212,7 +212,7 @@ public class Main {
 
 > > If the part makes no sense without the whole, use composition.
 
-## ![Hospital Design](/lowleveldesign/assets/orderdesign.png)
+## ![Hospital Design](../assets/orderdesign.png)
 
 Pay attention to three things that make this composition:
 
@@ -242,4 +242,4 @@ Why?
 - Aggregation is a grouping: the whole and parts can exist independently.
 - Composition is an ownership: the part’s existence is bound to the whole.
 
-## ![Hospital Design](/lowleveldesign/assets/compare.png)
+## ![Hospital Design](../assets/compare.png)

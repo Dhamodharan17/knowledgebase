@@ -33,14 +33,14 @@ public class GarbageCollectionExample {
 
 ## Heap Memory
 
-![Alt Text](/java/assests/heap-gc.png)
+![Alt Text](./assests/heap-gc.png)
 
 ## GC Cycles
 
 <details>
 <summary>Click to view image</summary>
 
-![Alt Text](/java/assests/gc-cycles.png)
+![Alt Text](./assests/gc-cycles.png)
 
 </details>
 
@@ -76,7 +76,7 @@ public class GarbageCollectionExample {
 <details>
 <summary>Click to view image</summary>
 
-![Alt Text](/java/assests/mark-sweep.png)
+![Alt Text](./assests/mark-sweep.png)
 
 </details>
 
@@ -98,7 +98,7 @@ public class GarbageCollectionExample {
 <details>
 <summary>Click to view image</summary>
 
-![Alt Text](/java/assests/gc-types.png)
+![Alt Text](./assests/gc-types.png)
 
 </details>
 
