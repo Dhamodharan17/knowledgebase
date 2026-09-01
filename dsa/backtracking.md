@@ -231,7 +231,7 @@ class Solution:
 <details>
 <summary>Click to view image</summary>
 
-![Alt Text](./assets/nqueens.png)
+![Alt Text](./dsa/assets/nqueens.png)
 
 </details>
 
@@ -283,9 +283,5 @@ class Solution:
             ci += 1
 
         return True
-
-```
-
-```
 
 ```
