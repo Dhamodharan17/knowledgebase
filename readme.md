@@ -2,6 +2,7 @@
 
 - [DSA](./dsa/readme.md)
   - [Dynamic Programming](./dsa/dynamicprogram.md)
+  - [Backtracking](./dsa/backtracking.md)
 - [Java](./java/readme.md)
   - [JVM](./java/jvm.md)
   - [Garbage Collections](./java/gc.md)
