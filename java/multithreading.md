@@ -1,56 +1,98 @@
 # Mulithreading
 
-## Thread States
+- [Thread Basics](#thread-basics)
+  - [Thread States](#thread-states)
+    - [NEW](#new)
+    - [RUNNABLE](#runnable)
+    - [BLOCKED](#blocked)
+    - [WAITING](#waiting)
+    - [TIMED_WAITING](#timed-waiting)
+    - [TERMINATED](#terminated)
+  - [run() vs start()](#run-vs-start)
+  - [Thread Priority](#thread-priority)
+  - [Daemon Thread](#daemon-thread)
+  - [ThreadLocal](#threadlocal)
+- [Synchronization & Locks](#synchronization--locks)
+  - [Race Condition](#race-condition)
+  - [synchronized](#synchronized)
+  - [Intrinsic Locks & Object Monitors](#intrinsic-locks--object-monitors)
+  - [Reentrancy](#reentrancy)
+  - [Atomicity](#atomicity)
+  - [Visibility](#visibility)
+  - [Happens-Before Relationship](#happens-before-relationship)
+  - [Java Memory Model](#java-memory-model)
+- [Thread Coordination](#thread-coordination)
+  - [wait()](#wait)
+  - [notify()](#notify)
+  - [notifyAll()](#notifyall)
+  - [Spurious Wakeups](#spurious-wakeups)
+  - [sleep() vs wait()](#sleep-vs-wait)
+  - [join() vs yield()](#join-vs-yield)
+  - [Condition](#condition)
+- [Concurrency Problems](#concurrency-problems)
+  - [Deadlock](#deadlock)
+    - [Coffman's Conditions](#coffmans-conditions)
+  - [Starvation](#starvation)
+  - [Livelock](#livelock)
+  - [Thread Safety](#thread-safety)
+- [Java Locks](#java-locks)
+  - [ReentrantLock](#reentrantlock)
+  - [ReentrantReadWriteLock](#reentrantreadwritelock)
+  - [Condition](#condition-1)
+  - [Lock vs synchronized](#lock-vs-synchronized)
+- [Synchronization Utilities](#synchronization-utilities)
+  - [Semaphore](#semaphore)
+  - [CountDownLatch](#countdownlatch)
+  - [CyclicBarrier](#cyclicbarrier)
+  - [Phaser](#phaser)
+  - [Exchanger](#exchanger)
+- [Atomic & Lock-Free Programming](#atomic--lock-free-programming)
+  - [AtomicInteger](#atomicinteger)
+  - [AtomicLong](#atomiclong)
+  - [AtomicReference](#atomicreference)
+  - [CAS](#cas)
+  - [compareAndSet()](#compareandset)
+  - [volatile + CAS](#volatile--cas)
+  - [ABA Problem](#aba-problem)
+- [Executor Framework](#executor-framework)
+  - [Executor](#executor)
+  - [ExecutorService](#executorservice)
+  - [ThreadPoolExecutor](#threadpoolexecutor)
+    - [Core Pool Size](#core-pool-size)
+    - [Maximum Pool Size](#maximum-pool-size)
+    - [Work Queue](#work-queue)
+    - [Keep Alive](#keep-alive)
+    - [Rejection Policies](#rejection-policies)
+  - [FixedThreadPool](#fixedthreadpool)
+  - [CachedThreadPool](#cachedthreadpool)
+  - [ScheduledExecutorService](#scheduledexecutorservice)
+  - [shutdown() vs shutdownNow()](#shutdown-vs-shutdownnow)
+- [Callable & Future](#callable--future)
+  - [Runnable vs Callable](#runnable-vs-callable)
+  - [Future](#future)
+  - [CompletableFuture](#completablefuture)
+    - [thenApply()](#thenapply)
+    - [thenCompose()](#thencompose)
+    - [thenCombine()](#thencombine)
+    - [exceptionally()](#exceptionally)
+    - [allOf() vs anyOf()](#allof-vs-anyof)
+- [ForkJoin Framework](#forkjoin-framework)
+  - [ForkJoinPool](#forkjoinpool)
+  - [Work Stealing](#work-stealing)
+  - [RecursiveTask](#recursivetask)
+  - [RecursiveAction](#recursiveaction)
+- [Modern Java Concurrency](#modern-java-concurrency)
+  - [Virtual Threads](#virtual-threads)
+  - [Platform Threads vs Virtual Threads](#platform-threads-vs-virtual-threads)
+  - [Executors.newVirtualThreadPerTaskExecutor()](#executorsnewvirtualthreadpertaskexecutor)
+  - [Virtual Thread Pinning](#virtual-thread-pinning)
+  - [When NOT to Use Virtual Threads](#when-not-to-use-virtual-threads)
 
-## Thread Priority & Deamon Thread
+### Thread Basics
 
-## Intrinsic Locks (Object Monitor)
+## Happens-Before Relationship
 
-## Race Condition
-
-## Synchronized
-
-## Atomicity
-
-## Visibility
-
-## Volatile Keyword
-
-## Happens Before Relationship
-
-## wait()/notify()/notifyAll()
-
-## sleep() vs wait()
-
-## join() vs yield()
-
-## Deadlock vs Stravation vs Livelock
-
-## ThreadSafe & ThreadLocal
-
-## Reentrant Lock
-
-## Condition
-
-## ReadWriteLock
-
-## Semaphore
-
-## CountdownLatch
-
-## CyclicBarrier
-
-## Phaser
-
-## Exchanger
-
-## ThreadPool & Executor Framework
-
-## ForkJoinPool and RecursiveTask
-
-## Future and CompletableFuture
-
-## Concurrent Collections
-
+- partial ordering on instruction since concurrent we cannot do total ordering
 - <https://web.goodnotes.com/s/NGiA9uSx4H4YE7FArjqVvN>
 - physical notes
+  <https://www.logicbig.com/tutorials/core-java-tutorial/java-multi-threading/happens-before.html>

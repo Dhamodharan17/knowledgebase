@@ -7,3 +7,6 @@
 file:///C:/Users/DSUNDAR/Downloads/Java_JVM.pdf
 
 file:///C:/Users/DSUNDAR/Documents/articles/java/Demysifying%20Java%20ClassLoaders\_%20A%20Deep%20dive%20into%20the%20JVM%E2%80%99s%20loading%20mechanism%20-%20Freedium.pdf
+
+<https://deepu.tech/memory-management-in-jvm/>
+<https://www.logicbig.com/tutorials/core-java-tutorial/java-multi-threading/thread-reordering.html>
