@@ -109,3 +109,5 @@
 - **Peak Ingress (Writes):** ~5 MB/s `[5,000 Peak Write QPS × 1 KB payload ≈ (5,000 KB/s)]`
 
 ---
+
+Missing Components to AddComponentArchitecture RoleKey BenefitPayment Gateway Webhook ServiceAsynchronous confirmationDecouples the 10-minute payment step from the main app server; handles async payment status callbacks reliably.Idempotency Key EngineMicroservices API LayerPrevents double-booking or duplicate charges when users retry failed network requests during high traffic.Outbox PatternDB $\rightarrow$ Event Bus (Kafka)Ensures transactional integrity between DB updates (booking confirmed) and notification triggers (SMS/Email receipt).Dead Letter Queue (DLQ)Message ProcessingCaptures failed payment confirmations or failed releases of expired seats for manual/background recovery.
