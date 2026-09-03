@@ -18,6 +18,7 @@
   - [Design Patterns](#design-patterns)
   - [Case Studies & Appoach](#case-studies)
 - [High Level Design](./highleveldesign/readme.md)
+  - [Back Of Envelope](./highleveldesign/back-of-envelope.md)
   - [Fundamentals](./oops/oops.md)
   - [Technologies](#core-design-principles)
   - [Trade-offs](#design-patterns)
